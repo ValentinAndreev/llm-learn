@@ -311,13 +311,7 @@ for pd in $enabled_plugin_dirs; do
 	done
 done
 
-# Codex-specific: rules and AGENTS.md (loaded fully, not just frontmatter)
-codex_rules_bytes=0
-codex_rules_dir="${HOME}/.codex/rules"
-if [ -d "$codex_rules_dir" ]; then
-	codex_rules_bytes="$(cat "$codex_rules_dir"/*.rules 2>/dev/null | wc -c | tr -d ' ')"
-fi
-
+# Codex-specific: AGENTS.md is loaded into context (rules are NOT — they're CLI permissions)
 codex_agents_md_bytes=0
 if [ -f "${HOME}/.codex/AGENTS.md" ]; then
 	codex_agents_md_bytes="$(wc -c < "${HOME}/.codex/AGENTS.md" | tr -d ' ')"
@@ -337,12 +331,11 @@ printf '    total:   ~%s tokens\n' "$claude_tokens"
 # --- Codex totals ---
 # Skills are shared (same ~/.agents/skills/), so count skills_bytes for Codex too
 
-codex_total=$((skills_bytes + codex_rules_bytes + codex_agents_md_bytes))
+codex_total=$((skills_bytes + codex_agents_md_bytes))
 codex_tokens=$(bytes_to_tokens "$codex_total")
 
 printf '\n  Codex:\n'
 printf '    skills:    ~%s tokens (shared)\n' "$(bytes_to_tokens "$skills_bytes")"
-printf '    rules:     ~%s tokens (%s lines)\n' "$(bytes_to_tokens "$codex_rules_bytes")" "$(cat "$codex_rules_dir"/*.rules 2>/dev/null | wc -l | tr -d ' ')"
 printf '    AGENTS.md: ~%s tokens\n' "$(bytes_to_tokens "$codex_agents_md_bytes")"
 printf '    total:     ~%s tokens\n' "$codex_tokens"
 
@@ -400,9 +393,6 @@ printf '\n  Top consumers:\n'
 		done
 	done
 
-	if [ "$codex_rules_bytes" -gt 0 ]; then
-		printf '%s\tcodex:rules\n' "$(bytes_to_tokens "$codex_rules_bytes")"
-	fi
 	if [ "$codex_agents_md_bytes" -gt 0 ]; then
 		printf '%s\tcodex:AGENTS.md\n' "$(bytes_to_tokens "$codex_agents_md_bytes")"
 	fi
