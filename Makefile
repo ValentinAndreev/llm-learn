@@ -22,7 +22,7 @@ GOOGLE_WORKSPACE_SKILLS := \
 	gws-sheets
 
 .PHONY: ai bootstrap mise-package mise-install check check-context register
-.PHONY: agents-install agents agents-cli agents-skills agents-claude-plugins
+.PHONY: agents-install agents agents-cli agents-skills extra-skills
 .PHONY: agents-skills-install agents-skills-list agents-skills-check-npx
 
 ai: bootstrap
@@ -69,7 +69,7 @@ mise-install: mise-package
 	@echo "Install mise tools"
 	@mise install --quiet
 
-agents-install: agents agents-cli agents-skills agents-claude-plugins
+agents-install: agents agents-cli agents-skills
 
 # --- AI Agents ---
 
@@ -81,8 +81,6 @@ agents:
 
 agents-cli:
 	@$(NPM) install -g @playwright/cli@latest
-	@$(NPM) install -g @dapi/tgcli
-	@$(NPM) install -g @googleworkspace/cli
 
 # --- Skills for agents ---
 
@@ -92,28 +90,37 @@ agents-skills-check-npx:
 	@$(SKILLS_NPX) --version >/dev/null 2>&1 || (echo "❌ npx not available via mise. Run 'make ai' after bootstrap installs Node.js." && exit 1)
 
 agents-skills-install: agents-skills-check-npx
-	@echo "$(BLUE)📦 Installing curated skills...$(NC)"
-	@echo "  📥 Installing tgcli from dapi/tgcli"
-	@$(SKILLS) add dapi/tgcli --skill tgcli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
+	@echo "$(BLUE)📦 Installing core skills...$(NC)"
 	@echo "  📥 Installing playwright-cli from microsoft/playwright-cli"
 	@$(SKILLS) add microsoft/playwright-cli --skill playwright-cli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@echo "  📥 Installing prompt-engeneering from CodeAlive-AI/prompt-engineering-skill"
 	@$(SKILLS) add CodeAlive-AI/prompt-engineering-skill@prompt-engeneering -g -y
+
+agents-skills-list:
+	@echo "$(BLUE)📋 Core skills:$(NC)"
+	@printf "  playwright-cli (microsoft/playwright-cli)\n"
+	@printf "  prompt-engeneering (CodeAlive-AI/prompt-engineering-skill)\n"
+
+# --- Extra skills and plugins (not installed by default) ---
+
+extra-skills: agents-skills-check-npx
+	@echo "$(BLUE)📦 Installing extra CLIs, skills, and plugins...$(NC)"
+	@$(NPM) install -g @dapi/tgcli
+	@$(NPM) install -g @googleworkspace/cli
+	@echo "  📥 Installing tgcli from dapi/tgcli"
+	@$(SKILLS) add dapi/tgcli --skill tgcli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
 		echo "  📥 Installing $$skill from googleworkspace/cli"; \
 		$(SKILLS) add googleworkspace/cli --skill "$$skill" -g $(AGENTS_SKILLS_AGENT_FLAGS) -y; \
 	done
-
-agents-skills-list:
-	@echo "$(BLUE)📋 Curated skills:$(NC)"
-	@printf "  tgcli (dapi/tgcli)\n"
-	@printf "  playwright-cli (microsoft/playwright-cli)\n"
-	@printf "  prompt-engeneering (CodeAlive-AI/prompt-engineering-skill)\n"
-	@for skill in $(GOOGLE_WORKSPACE_SKILLS); do \
-		printf "  %s (googleworkspace/cli)\n" "$$skill"; \
+	@for mp in $(CLAUDE_PLUGINS_MARKETPLACES); do \
+		echo "  Adding marketplace $$mp..."; \
+		$(CLAUDE) plugins marketplace add $$mp; \
 	done
-
-# --- Claude Code plugins ---
+	@for plugin in $(CLAUDE_PLUGINS); do \
+		echo "  Installing plugin $$plugin..."; \
+		$(CLAUDE) plugins install $$plugin; \
+	done
 
 CLAUDE_PLUGINS_MARKETPLACES ?= dapi/claude-code-marketplace
 
@@ -122,16 +129,6 @@ CLAUDE_PLUGINS ?= \
 	pr-review-fix-loop@$(CLAUDE_PLUGIN_NAMESPACE) \
 	spec-reviewer@$(CLAUDE_PLUGIN_NAMESPACE) \
 	zellij-workflow@$(CLAUDE_PLUGIN_NAMESPACE) \
-
-agents-claude-plugins:
-	@for mp in $(CLAUDE_PLUGINS_MARKETPLACES); do \
-		echo "Adding marketplace $$mp..."; \
-		$(CLAUDE) plugins marketplace add $$mp; \
-	done
-	@for plugin in $(CLAUDE_PLUGINS); do \
-		echo "Installing plugin $$plugin..."; \
-		$(CLAUDE) plugins install $$plugin; \
-	done
 
 # --- Registry ---
 
