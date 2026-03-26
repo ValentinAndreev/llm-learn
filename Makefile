@@ -3,7 +3,7 @@
 BLUE := \033[0;34m
 NC := \033[0m
 PATH := $(HOME)/.local/bin:/usr/local/bin:/opt/homebrew/bin:$(PATH)
-VERSION_FILE ?= VERSION
+VERSION ?= 0.1.2
 
 NPM ?= mise exec -- npm
 CLAUDE ?= mise exec -- claude
@@ -32,11 +32,11 @@ ai: bootstrap
 bootstrap: mise-package mise-install
 
 version:
-	@version="$$(tr -d '[:space:]' < "$(VERSION_FILE)")"; \
+	@version="$(VERSION)"; \
 	if printf '%s' "$$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?([+][0-9A-Za-z.-]+)?$$'; then \
 		printf '%s\n' "$$version"; \
 	else \
-		echo "❌ $(VERSION_FILE) must contain a semver value" >&2; \
+		echo "❌ VERSION must contain a semver value" >&2; \
 		exit 1; \
 	fi
 
