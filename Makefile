@@ -105,6 +105,7 @@ agents-skills-list:
 
 extra-skills: agents-skills-check-npx
 	@echo "$(BLUE)📦 Installing extra CLIs, skills, and plugins...$(NC)"
+	@mise install "github:pimalaya/himalaya"
 	@$(NPM) install -g @dapi/tgcli
 	@$(NPM) install -g @googleworkspace/cli
 	@echo "  📥 Installing tgcli from dapi/tgcli"
@@ -128,7 +129,7 @@ CLAUDE_PLUGINS ?= \
 	himalaya@$(CLAUDE_PLUGIN_NAMESPACE) \
 	pr-review-fix-loop@$(CLAUDE_PLUGIN_NAMESPACE) \
 	spec-reviewer@$(CLAUDE_PLUGIN_NAMESPACE) \
-	zellij-workflow@$(CLAUDE_PLUGIN_NAMESPACE) \
+	zellij-workflow@$(CLAUDE_PLUGIN_NAMESPACE)
 
 # --- Registry ---
 

@@ -270,7 +270,6 @@ section "Core toolchain (required)"
 check_command required "mise installed" mise --version
 check_command required "direnv installed" direnv version
 check_command required "gh installed" gh --version
-check_command required "himalaya installed" himalaya --version
 check_command required "gitleaks installed" gitleaks version
 check_command required "jq installed" jq --version
 check_command required "node installed" node --version
@@ -286,18 +285,18 @@ section "Agent CLIs (required)"
 check_command required "claude installed" claude --version
 check_command required "codex installed" codex --version
 check_command required "playwright-cli installed" playwright-cli --version
-check_command required "tgcli installed" tgcli --help
-check_command required "gws installed" gws --help
-
 section "Account-backed tools"
 check_json_command required "claude authenticated" '.loggedIn == true' claude auth status --json
 check_command required "codex authenticated" codex login status
 check_command required "gh authenticated" gh auth status
+
+section "Optional agent extras"
+check_command optional "tgcli installed" tgcli --help
+check_command optional "gws installed" gws --help
+check_command optional "himalaya installed" himalaya --version
 check_command optional "tgcli authenticated" tgcli auth status
 check_json_command optional "gws authenticated" '(.token_valid // false) == true' gws auth status
 check_himalaya_accounts
-
-section "Optional agent extras"
 check_skills
 check_claude_plugins
 
