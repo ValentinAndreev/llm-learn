@@ -71,36 +71,8 @@ command_in_path() {
 	PATH="$ORIG_PATH" command -v "$1" >/dev/null 2>&1
 }
 
-detect_shell_rc() {
-	local user_shell
-	user_shell="$(basename "${SHELL:-bash}")"
-	case "$user_shell" in
-		fish) printf '%s' "${HOME}/.config/fish/config.fish" ;;
-		zsh)  printf '%s' "${HOME}/.zshrc" ;;
-		*)    printf '%s' "${HOME}/.bashrc" ;;
-	esac
-}
-
-check_shell_hook() {
-	local label="$1"
-	local pattern="$2"
-	local rc_file
-	rc_file="$(detect_shell_rc)"
-
-	if [ ! -f "$rc_file" ]; then
-		fail "$label configured in shell rc"
-		note "Shell rc file not found: $rc_file"
-		return 1
-	fi
-
-	if grep -qE "$pattern" "$rc_file" 2>/dev/null; then
-		ok "$label configured in $rc_file"
-		return 0
-	fi
-
-	fail "$label configured in shell rc"
-	note "Add $label to $rc_file — see: https://mise.jdx.dev/getting-started.html or https://direnv.net/docs/hook.html"
-	return 1
+path_contains() {
+	printf '%s' "$ORIG_PATH" | tr ':' '\n' | grep -q "$1"
 }
 
 check_command() {
@@ -306,19 +278,23 @@ check_claude_plugins() {
 
 section "Shell integration (required)"
 if command_in_path mise; then
-	ok "mise in PATH (without ai-setup additions)"
+	ok "mise in PATH"
 else
-	fail "mise in PATH (without ai-setup additions)"
-	note "mise is not in your shell PATH. Add it to your shell rc or install via brew."
+	fail "mise in PATH"
+	note "mise is not in your shell PATH. Install via brew or add ~/.local/bin to PATH."
+fi
+if path_contains "mise/shims\|mise/installs"; then
+	ok "mise activate (tool paths in PATH)"
+else
+	fail "mise activate (tool paths in PATH)"
+	note "mise tool directories not in PATH. Add 'mise activate' to your shell rc — see: https://mise.jdx.dev/getting-started.html"
 fi
 if command_in_path direnv; then
-	ok "direnv in PATH (without ai-setup additions)"
+	ok "direnv in PATH"
 else
-	fail "direnv in PATH (without ai-setup additions)"
+	fail "direnv in PATH"
 	note "direnv is not in your shell PATH. Ensure mise activate is configured so mise-installed tools are available."
 fi
-check_shell_hook "mise activate" 'mise activate|mise\.sh'
-check_shell_hook "direnv hook" 'direnv hook|eval "\$\(direnv|plugins=\(.*direnv'
 
 section "Core toolchain (required)"
 check_command required "mise installed" mise --version
