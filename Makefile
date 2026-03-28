@@ -120,7 +120,7 @@ agents-skills-install: agents-skills-check-npx
 	@echo "  📥 Installing playwright-cli from microsoft/playwright-cli"
 	@$(SKILLS) add microsoft/playwright-cli --skill playwright-cli -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@echo "  📥 Installing prompt-engeneering from CodeAlive-AI/prompt-engineering-skill"
-	@$(SKILLS) add CodeAlive-AI/prompt-engineering-skill@prompt-engeneering -g -y
+	@$(SKILLS) add CodeAlive-AI/prompt-engineering-skill@prompt-engineering -g -y
 	@echo "  📥 Installing ccbox from diskd-ai/ccbox"
 	@$(SKILLS) add diskd-ai/ccbox --skill ccbox -g $(AGENTS_SKILLS_AGENT_FLAGS) -y
 	@echo "  📥 Installing ccbox-insights from diskd-ai/ccbox"
