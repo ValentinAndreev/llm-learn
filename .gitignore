@@ -1,1 +1,32 @@
 .obsidian/
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
+# Bundler
+/.bundle
+
+# Bootsnap cache
+/tmp/cache/bootsnap/
+
+# Tmp
+/tmp/pids/
+/tmp/storage/
+
+# Logs
+/log/*
+!/log/.keep
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Storage
+/storage/*
+!/storage/.keep
+
+# IDE
+.idea/
+.vscode/
+
