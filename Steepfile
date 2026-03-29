@@ -5,6 +5,7 @@ target :app do
 
   check "app/models"
   check "app/controllers"
+  check "app/channels"
   check "app/helpers"
   check "app/jobs"
   check "app/mailers"

@@ -1,0 +1,17 @@
+<div class="chat-container" data-controller="chat">
+  <div class="chat-messages" data-chat-target="messages">
+  </div>
+
+  <div class="chat-input-area">
+    <form data-action="submit->chat#submit">
+      <textarea
+        class="chat-input"
+        data-chat-target="input"
+        placeholder="Введите сообщение и нажмите Enter или кнопку Отправить..."
+        rows="4"
+        data-action="keydown->chat#submitOnEnter"
+      ></textarea>
+      <button type="submit" class="chat-send-btn">Отправить</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+
+!!! RubyLLM's legacy acts_as API is deprecated and will be removed in RubyLLM 2.0.0. Please consult the migration guide at https://rubyllm.com/upgrading-to-1-7/
+
+Started GET "/" for 127.0.0.1 at 2026-03-29 11:29:41 +0300
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='LlmLearn'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='LlmLearn'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LlmLearn'*/[0m
+Processing by ChatController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering chat/index.html.erb within layouts/application
+  Rendered chat/index.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 8.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2026-03-29 11:29:42 +0300
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2026-03-29 11:29:42 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Registered connection (25f9bc11-ef94-4d3d-8f30-d31726bda70f)
+ChatChannel is transmitting the subscription confirmation
+ChatChannel is streaming from chat_25f9bc11-ef94-4d3d-8f30-d31726bda70f
+ChatChannel#receive({"message" => "проверка работы взаимодействия по api"})
+[ActionCable] Broadcasting to chat_25f9bc11-ef94-4d3d-8f30-d31726bda70f: {type: "response", content: "Проверка взаимодействия по API — это критически важный этап разработки, который гарантирует, что фронтенд, мобильное приложение или сторонние сервисы корректно общаются с вашим бэкендом.\n\nВот подробный гайд, как организовать проверку API, от ручных тестов до автомат...
+ChatChannel transmitting {"type" => "response", "content" => "Проверка взаимодействия по API — это критически важный этап разработки, который гарантирует, что фронтенд, мобильное приложение или сторонние сервисы корректно общаются с вашим бэкендом.\n\nВот подробный гайд, как организовать проверку API, от ручных тестов до... (via streamed from chat_25f9bc11-ef94-4d3d-8f30-d31726bda70f)
+ChatChannel#receive({"message" => "а что еще дополнишь к предыдущему сообщению?"})
+[ActionCable] Broadcasting to chat_25f9bc11-ef94-4d3d-8f30-d31726bda70f: {type: "response", content: "Поскольку в этом чате я не вижу нашего предыдущего диалога (история могла не сохраниться или мы начали новую сессию), мне нужно, чтобы ты **напомнил тему обсуждения**.\n\nОднако, к любой полезной инструкции, совету или анализу я обычно добавляю следующие **5 важных ас...
+ChatChannel transmitting {"type" => "response", "content" => "Поскольку в этом чате я не вижу нашего предыдущего диалога (история могла не сохраниться или мы начали новую сессию), мне нужно, чтобы ты **напомнил тему обсуждения**.\n\nОднако, к любой полезной инструкции, совету или анализу я обычно добавляю следующие **5 в... (via streamed from chat_25f9bc11-ef94-4d3d-8f30-d31726bda70f)

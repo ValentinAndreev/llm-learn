@@ -1,0 +1,16 @@
+module ApplicationCable
+  class Connection < ActionCable::Connection::Base
+    attr_accessor uuid: String
+
+    def connect: () -> void
+  end
+
+  class Channel < ActionCable::Channel::Base
+  end
+end
+
+class ChatChannel < ApplicationCable::Channel
+  def subscribed: () -> void
+  def unsubscribed: () -> void
+  def receive: (Hash[String, untyped] data) -> void
+end
