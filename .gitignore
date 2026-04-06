@@ -16,6 +16,9 @@
 /log/*
 !/log/.keep
 
+# Coverage reports
+/coverage/
+
 # macOS
 .DS_Store
 
@@ -34,4 +37,3 @@
 # IDE
 .idea/
 .vscode/
-

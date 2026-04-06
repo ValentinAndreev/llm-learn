@@ -12,6 +12,7 @@ class ChatChannel < ApplicationCable::Channel
     return if message.empty?
 
     dialog_id = data["dialog_id"]
+    dialog = nil
     new_dialog_id = nil
 
     ActiveRecord::Base.transaction do
@@ -28,7 +29,6 @@ class ChatChannel < ApplicationCable::Channel
 
     ActionCable.server.broadcast("chat_#{uuid}", { type: "dialog_created", dialog_id: new_dialog_id }) if new_dialog_id
 
-    dialog = Dialog.find(dialog_id)
     history = dialog.messages.order(:created_at).to_a
 
     chat = RubyLLM.chat(model: "gemini-3-flash-preview")
@@ -40,7 +40,7 @@ class ChatChannel < ApplicationCable::Channel
   rescue ActiveRecord::RecordInvalid, ActiveRecord::StatementInvalid => e
     ActionCable.server.broadcast("chat_#{uuid}", { type: "error", message: "Failed to save message" })
   rescue => e
-    ActionCable.server.broadcast("chat_#{uuid}", { type: "error", content: e.message })
+    ActionCable.server.broadcast("chat_#{uuid}", { type: "error", message: e.message })
   end
 
   def open_dialog(data)

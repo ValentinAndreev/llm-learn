@@ -119,7 +119,7 @@ RSpec.describe ChatChannel, type: :channel do
       expect {
         subscription.receive({ "message" => "Привет" })
       }.to have_broadcasted_to("chat_test-uuid-123").with(
-        hash_including("type" => "error", "message" => "Не удалось сохранить сообщение")
+        hash_including("type" => "error", "message" => "Failed to save message")
       )
     end
   end

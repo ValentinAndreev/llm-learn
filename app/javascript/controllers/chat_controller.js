@@ -148,7 +148,7 @@ export default class extends Controller {
       if (data.dialog_id !== this.currentDialogId) return
       this.#appendMessage("assistant", data.content)
     } else if (data.type === "error") {
-      this.#showFlash(data.message || data.content || "Error")
+      this.#showFlash(data.message || "Error")
     } else if (data.type === "dialog_created") {
       this.currentDialogId = data.dialog_id
       this.inputTarget.disabled = false
@@ -184,18 +184,11 @@ export default class extends Controller {
     }
 
     list.innerHTML = dialogs.map(d => `
-      <div class="chat-dialog-item" data-dialog-id="${d.id}" data-chat-target="dialogItem">
+      <div class="chat-dialog-item" data-dialog-id="${d.id}" data-chat-target="dialogItem" data-action="click->chat#openDialogFromEl">
         <span class="chat-dialog-title" data-action="dblclick->chat#startRename">${this.#escapeHtml(d.title)}</span>
         <button class="chat-dialog-delete-btn" data-action="click->chat#deleteDialog" data-dialog-id="${d.id}">✕</button>
       </div>
     `).join("")
-
-    list.querySelectorAll("[data-dialog-id]").forEach(item => {
-      item.addEventListener("click", (e) => {
-        if (e.target.closest(".chat-dialog-delete-btn") || e.target.closest(".chat-dialog-rename-input")) return
-        this.#openDialog(parseInt(item.dataset.dialogId), item.querySelector(".chat-dialog-title").textContent.trim())
-      })
-    })
   }
 
   #openDialog(dialogId, title) {
