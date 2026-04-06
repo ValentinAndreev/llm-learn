@@ -1,17 +1,41 @@
 <div class="chat-container" data-controller="chat">
-  <div class="chat-messages" data-chat-target="messages">
+  <div class="chat-sidebar">
+    <button class="chat-new-btn" data-action="click->chat#newDialog">+ New dialog</button>
+
+    <div class="chat-dialogs-list" data-chat-target="dialogsList">
+      <% if @dialogs.any? %>
+        <% @dialogs.each do |dialog| %>
+          <div class="chat-dialog-item" data-dialog-id="<%= dialog.id %>" data-chat-target="dialogItem" data-action="click->chat#openDialogFromEl">
+            <span class="chat-dialog-title" data-action="dblclick->chat#startRename">
+              <%= dialog.title %>
+            </span>
+            <button class="chat-dialog-delete-btn" data-action="click->chat#deleteDialog" data-dialog-id="<%= dialog.id %>">✕</button>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="chat-no-dialogs" data-chat-target="noDialogs">No saved dialogs</div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="chat-input-area">
-    <form data-action="submit->chat#submit">
-      <textarea
-        class="chat-input"
-        data-chat-target="input"
-        placeholder="Введите сообщение и нажмите Enter или кнопку Отправить..."
-        rows="4"
-        data-action="keydown->chat#submitOnEnter"
-      ></textarea>
-      <button type="submit" class="chat-send-btn">Отправить</button>
-    </form>
+  <div class="chat-main">
+    <div class="chat-dialog-header" data-chat-target="dialogHeader" style="display:none;">
+      <span class="chat-dialog-current-title" data-chat-target="currentTitle"></span>
+    </div>
+
+    <div class="chat-messages" data-chat-target="messages"></div>
+
+    <div class="chat-input-area">
+      <form data-action="submit->chat#submit">
+        <textarea
+          class="chat-input"
+          data-chat-target="input"
+          placeholder="Type a message and press Enter or click Send..."
+          rows="4"
+          data-action="keydown->chat#submitOnEnter"
+        ></textarea>
+        <button type="submit" class="chat-send-btn">Send</button>
+      </form>
+    </div>
   </div>
 </div>

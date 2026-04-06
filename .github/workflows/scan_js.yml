@@ -19,7 +19,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bundle exec importmap audit
+        run: bin/importmap audit
 
       - name: Bootstrap toolchain
         run: make -f .ai-setup/Makefile bootstrap

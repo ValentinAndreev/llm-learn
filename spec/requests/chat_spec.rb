@@ -21,5 +21,16 @@ RSpec.describe "Chat", type: :request do
       get root_path
       expect(response.body).to include('data-chat-target="input"')
     end
+
+    it "passes @dialogs to the template" do
+      create(:dialog, title: "Существующий диалог")
+      get root_path
+      expect(response.body).to include("Существующий диалог")
+    end
+
+    it "shows empty state when no dialogs" do
+      get root_path
+      expect(response.body).to include("No saved dialogs")
+    end
   end
 end

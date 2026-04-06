@@ -1,3 +1,5 @@
 class ChatController < ApplicationController
+  @dialogs: ActiveRecord::Relation
+
   def index: () -> void
 end

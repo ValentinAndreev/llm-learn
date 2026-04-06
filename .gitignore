@@ -10,12 +10,17 @@
 /tmp/cache/bootsnap/
 
 # Tmp
-/tmp/pids/
-/tmp/storage/
+/tmp/
 
 # Logs
 /log/*
 !/log/.keep
+
+# macOS
+.DS_Store
+
+# Credentials backup
+/config/credentials.yml.enc.bak
 
 # Environment
 .env

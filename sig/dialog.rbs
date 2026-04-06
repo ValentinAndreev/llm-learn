@@ -1,0 +1,10 @@
+class Dialog < ApplicationRecord
+  attr_accessor id: Integer
+  attr_accessor title: String
+  attr_accessor created_at: Time
+  attr_accessor updated_at: Time
+
+  def self.by_last_message: () -> ActiveRecord::Relation
+
+  def messages: () -> ActiveRecord::Associations::CollectionProxy
+end

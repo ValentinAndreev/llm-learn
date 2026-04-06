@@ -1,0 +1,5 @@
+class DialogsController < ApplicationController
+  def index: () -> void
+  def destroy: () -> void
+  def update: () -> void
+end

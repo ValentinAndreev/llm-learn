@@ -1,0 +1,10 @@
+class Message < ApplicationRecord
+  attr_accessor id: Integer
+  attr_accessor dialog_id: Integer
+  attr_accessor role: String
+  attr_accessor content: String
+  attr_accessor created_at: Time
+  attr_accessor updated_at: Time
+
+  def dialog: () -> Dialog
+end

@@ -13,4 +13,9 @@ class ChatChannel < ApplicationCable::Channel
   def subscribed: () -> void
   def unsubscribed: () -> void
   def receive: (Hash[String, untyped] data) -> void
+  def open_dialog: (Hash[String, untyped] data) -> void
+
+  private
+
+  def uuid: () -> String
 end
