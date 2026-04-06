@@ -1,0 +1,28 @@
+name: Scan JS
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  scan_js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Scan for security vulnerabilities in JavaScript dependencies
+        run: bundle exec importmap audit
+
+      - name: Bootstrap toolchain
+        run: make -f .ai-setup/Makefile bootstrap
+
+      - name: Install agent CLIs and helper tools
+        run: make -f .ai-setup/Makefile agents agents-cli
