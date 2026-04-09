@@ -1,10 +1,21 @@
 class Dialog < ApplicationRecord
+  WORKFLOW_STATES: Array[String]
+  TOPIC_SLUG_FORMAT: Regexp
+
   attr_accessor id: Integer
   attr_accessor title: String
+  attr_accessor goal: String?
+  attr_accessor workflow_state: String
+  attr_accessor topic_slug: String?
+  attr_accessor current_conspect_prompt: String?
   attr_accessor created_at: Time
   attr_accessor updated_at: Time
 
   def self.by_last_message: () -> ActiveRecord::Relation
 
   def messages: () -> ActiveRecord::Associations::CollectionProxy
+
+  private
+
+  def normalize_goal: () -> String?
 end

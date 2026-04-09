@@ -6,6 +6,10 @@ RSpec.describe Dialog, type: :model do
       expect(build(:dialog)).to be_valid
     end
 
+    it "defaults workflow_state to collecting_info" do
+      expect(create(:dialog).workflow_state).to eq("collecting_info")
+    end
+
     it "is invalid without a title" do
       expect(build(:dialog, title: nil)).not_to be_valid
     end
@@ -16,6 +20,40 @@ RSpec.describe Dialog, type: :model do
 
     it "is invalid with a title longer than 255 characters" do
       expect(build(:dialog, title: "a" * 256)).not_to be_valid
+    end
+
+    it "is invalid with an unsupported workflow_state" do
+      dialog = build(:dialog, workflow_state: "draft")
+
+      expect(dialog).not_to be_valid
+      expect(dialog.errors[:workflow_state]).to include("is not included in the list")
+    end
+
+    it "allows a nil topic_slug" do
+      expect(build(:dialog, topic_slug: nil)).to be_valid
+    end
+
+    it "allows a valid topic_slug" do
+      expect(build(:dialog, topic_slug: "linear-algebra-101")).to be_valid
+    end
+
+    it "rejects an invalid topic_slug" do
+      dialog = build(:dialog, topic_slug: "Linear Algebra")
+
+      expect(dialog).not_to be_valid
+      expect(dialog.errors[:topic_slug]).to include("is invalid")
+    end
+
+    it "normalizes blank goal to nil" do
+      dialog = create(:dialog, goal: "   ")
+
+      expect(dialog.goal).to be_nil
+    end
+
+    it "strips surrounding whitespace from goal" do
+      dialog = create(:dialog, goal: "  Изучить Ruby on Rails  ")
+
+      expect(dialog.goal).to eq("Изучить Ruby on Rails")
     end
   end
 

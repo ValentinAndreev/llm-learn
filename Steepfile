@@ -12,6 +12,7 @@ target :app do
 
   library "date"
   library "json"
+  library "securerandom"
 
   configure_code_diagnostics(D::Ruby.default)
 end

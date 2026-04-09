@@ -12,18 +12,19 @@ class ChatChannel < ApplicationCable::Channel
     return if message.empty?
 
     dialog_id = data["dialog_id"]
-    dialog = nil
     new_dialog_id = nil
 
-    ActiveRecord::Base.transaction do
+    dialog = ActiveRecord::Base.transaction do
       if dialog_id.nil?
-        dialog = Dialog.create!(title: message.truncate(50, omission: ""))
-        dialog_id = dialog.id
-        new_dialog_id = dialog.id
-        dialog.messages.create!(role: "user", content: message)
+        new_dialog = Dialog.create!(title: message.truncate(50, omission: ""))
+        dialog_id = new_dialog.id
+        new_dialog_id = new_dialog.id
+        new_dialog.messages.create!(role: "user", content: message)
+        new_dialog
       else
-        dialog = Dialog.find(dialog_id)
-        dialog.messages.create!(role: "user", content: message)
+        existing_dialog = Dialog.find(dialog_id)
+        existing_dialog.messages.create!(role: "user", content: message)
+        existing_dialog
       end
     end
 

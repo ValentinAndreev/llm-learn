@@ -1,0 +1,21 @@
+module ActionCable
+  class Server
+    def broadcast: (String broadcasting, Hash[Symbol | String, untyped] message) -> void
+  end
+
+  def self.server: () -> Server
+
+  module Connection
+    class Base
+      def self.identified_by: (*Symbol) -> void
+    end
+  end
+
+  module Channel
+    class Base
+      def stream_from: (String broadcasting) -> void
+      def stop_all_streams: () -> void
+      def connection: () -> untyped
+    end
+  end
+end

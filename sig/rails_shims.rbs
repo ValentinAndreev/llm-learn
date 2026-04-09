@@ -1,0 +1,77 @@
+module Arel
+  def self.sql: (String sql) -> untyped
+end
+
+module ActiveRecord
+  class Relation
+    def group: (*untyped) -> Relation
+    def order: (*untyped) -> Relation
+    def map: () { (untyped) -> untyped } -> Array[untyped]
+  end
+
+  module Associations
+    class CollectionProxy
+      def create!: (**untyped attributes) -> untyped
+      def order: (*untyped) -> CollectionProxy
+      def map: () { (untyped) -> untyped } -> Array[untyped]
+      def to_a: () -> Array[untyped]
+    end
+  end
+
+  class Base
+    def self.primary_abstract_class: () -> void
+    def self.has_many: (*untyped, **untyped) -> void
+    def self.belongs_to: (*untyped, **untyped) -> void
+    def self.validates: (*untyped, **untyped) -> void
+    def self.before_validation: (*untyped, **untyped) -> void
+    def self.scope: (*untyped, **untyped) -> void
+    def self.left_joins: (*untyped) -> Relation
+    def self.find: (untyped id) -> untyped
+    def self.create!: (**untyped attributes) -> instance
+    def self.transaction: () { () -> untyped } -> untyped
+
+    def destroy!: () -> void
+    def update: (**untyped attributes) -> bool
+    def errors: () -> untyped
+  end
+
+  class RecordInvalid < StandardError
+  end
+
+  class StatementInvalid < StandardError
+  end
+
+  class RecordNotFound < StandardError
+  end
+end
+
+module ActionController
+  class Base
+    def self.allow_browser: (*untyped, **untyped) -> void
+    def self.stale_when_importmap_changes: () -> void
+
+    def render: (*untyped, **untyped) -> void
+    def head: (Symbol | Integer status) -> void
+    def params: () -> untyped
+  end
+end
+
+module ActionMailer
+  class Base
+    def self.default: (**untyped) -> void
+    def self.layout: (String) -> void
+  end
+end
+
+module ActiveJob
+  class Base
+  end
+end
+
+class Object
+  def presence: () -> untyped
+end
+
+class String
+  def truncate: (Integer length, omission: String) -> String
+end

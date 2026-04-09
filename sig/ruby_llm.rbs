@@ -1,0 +1,3 @@
+module RubyLLM
+  def self.chat: (**untyped) -> untyped
+end
