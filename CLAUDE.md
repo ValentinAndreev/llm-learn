@@ -17,6 +17,8 @@ review plan: <id>    проверить plan
 
 impl: <id>           реализовать
 review: <id>         code review
+
+fix review: <id> <stage>  исправить замечания из review notes
 ```
 
 ## Stack
@@ -29,6 +31,7 @@ Ruby on Rails 8.1, Ruby 4.0.1, PostgreSQL, RSpec, RubyLLM
 - `bin/rails db:migrate` — migrate
 
 ## Hard constraints
+- If a command requires an input artifact and that artifact is missing, stop with a blocker message instead of inferring from other files
 - Don't touch existing migrations
 - Don't implement auth
 - No new gems without explicit request

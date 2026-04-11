@@ -9,6 +9,15 @@
 
 ---
 
+## Fail-Fast Preconditions
+
+- Для `brief: <идея>` дополнительных входных артефактов нет.
+- Для `review brief: <id>` обязателен существующий `memory_bank/features/<id>_<name>/brief.md`.
+- Если обязательный артефакт отсутствует, остановись и верни blocker-сообщение:
+  `BLOCKER: missing memory_bank/features/<id>_<name>/brief.md. Cannot run review brief: <id>. Next step: create or restore the Brief first.`
+- Не пытайся делать review brief по `spec.md`, `plan.md` или `current-focus.md`, если самого brief нет.
+
+
 ## Создание Brief
 
 Помоги создать Brief для новой фичи по шаблону:
@@ -38,6 +47,9 @@
 ## Ревью Brief
 
 Ты — ревьюер бизнес-задач. Проверь Brief на полноту и однозначность.
+
+Сохрани результат ревью в `memory_bank/features/<id>_<name>/reviews/brief.md`.
+Если это повторное ревью после исправлений, перезапиши тот же файл; историю сохранит git.
 
 Критерии:
 1. Проблема конкретна и измерима (не «улучшить», а конкретная боль или метрика)

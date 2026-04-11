@@ -9,6 +9,16 @@
 
 ---
 
+## Fail-Fast Preconditions
+
+- Для `spec: <id>` обязателен существующий `memory_bank/features/<id>_<name>/brief.md`.
+- Для `review spec: <id>` обязателен существующий `memory_bank/features/<id>_<name>/spec.md`.
+- Если обязательный артефакт отсутствует, остановись и верни blocker-сообщение.
+- Пример:
+  `BLOCKER: missing memory_bank/features/<id>_<name>/brief.md. Cannot run spec: <id>. Next step: create or restore the Brief first.`
+- Не пытайся писать или исправлять spec по `plan.md`, `current-focus.md` или соседним файлам, если исходный brief/spec отсутствует.
+
+
 ## Создание Spec
 
 Помоги создать спецификацию для фичи по шаблону:
@@ -46,6 +56,9 @@
 ## Ревью Spec
 
 Ты — строгий ревьюер спецификаций для AI-агентов. Проверь спеку по критериям TAUS.
+
+Сохрани результат ревью в `memory_bank/features/<id>_<name>/reviews/spec.md`.
+Если это повторное ревью после исправлений, перезапиши тот же файл; историю сохранит git.
 
 Для каждого критерия дай оценку pass/fail:
 

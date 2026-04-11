@@ -35,13 +35,15 @@
 
 ### Review / Verify — ревью артефактов или кода
 1. Spec + plan из feature package
-2. `engineering/conventions.md`
-3. Промпты: `.prompts/spec.md`, `.prompts/plan.md`, `.prompts/review-code.md` (чеклист + code review)
+2. Соответствующий `reviews/<stage>.md`, если это re-review после исправлений
+3. `engineering/conventions.md`
+4. Промпты: `.prompts/spec.md`, `.prompts/plan.md`, `.prompts/review-code.md`, `.prompts/fix-review.md`
 
 ### Resume / Continue — продолжение прерванной работы
-1. `process/current-focus.md` — активная задача и следующий шаг (читать первым)
+1. `process/current-focus.md` — активная задача, текущий этап, следующий шаг, `Review notes`
 2. Feature package активной фичи: brief + spec + plan
-3. `engineering/conventions.md` если нужны правила
+3. Если в `current-focus.md` указан `Review notes`, прочитай этот файл перед продолжением
+4. `engineering/conventions.md` если нужны правила
 
 ## Priming Prompts
 
@@ -52,6 +54,12 @@
 | `.prompts/spec.md` | Создание и ревью Spec |
 | `.prompts/plan.md` | Создание и ревью Plan |
 | `.prompts/review-code.md` | Done-чеклист + code review |
+| `.prompts/fix-review.md` | Исправление замечаний из review notes |
+
+
+## Fail-Fast Rule
+
+Если обязательный входной артефакт команды отсутствует (`brief.md`, `spec.md`, `plan.md`, `reviews/<stage>.md`), агент сразу возвращает blocker-сообщение и не пытается восстановить контекст по downstream-артефактам.
 
 ## Быстрые команды
 
@@ -59,11 +67,12 @@
 |---|---|
 | `resume` | продолжить с того места где остановились |
 | `orient` | понять где проект и что дальше |
-| `brief: <идея>` | написать brief для новой фичи |
+| `brief: <task>` | написать brief для новой фичи |
 | `review brief: <id>` | проверить brief |
 | `spec: <id>` | написать spec по готовому brief |
 | `review spec: <id>` | проверить spec |
 | `plan: <id>` | написать plan по готовой spec |
 | `review plan: <id>` | проверить plan |
 | `impl: <id>` | реализовать по готовому plan |
-| `review: <id>` | code review готовой реализации |
+| `review: <id>` | code review готовой реализации и сохранить результат в `reviews/impl.md` |
+| `fix review: <id> <stage>` | прочитать `reviews/<stage>.md`, исправить соответствующий артефакт и обновить `current-focus` на повторный review той же стадии |

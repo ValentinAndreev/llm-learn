@@ -6,7 +6,19 @@
 1. Spec + plan активной фичи (в `memory_bank/features/<id>_<name>/`)
 2. `memory_bank/engineering/conventions.md` — coding style, testing rules
 
+Сохрани результат ревью в `memory_bank/features/<id>_<name>/reviews/impl.md`.
+Если это повторное ревью после исправлений, перезапиши тот же файл; историю сохранит git.
+
 ---
+
+## Fail-Fast Preconditions
+
+- Для `review: <id>` обязателен feature package с существующими `spec.md` и `plan.md`.
+- Если одного из файлов нет, остановись и верни blocker-сообщение.
+- Пример:
+  `BLOCKER: missing memory_bank/features/<id>_<name>/plan.md. Cannot run review: <id>. Next step: create or restore the Plan first.`
+- Не подменяй отсутствующие ограничения анализом одного только кода или диффа.
+
 
 ## Быстрый чеклист перед Done
 

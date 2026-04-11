@@ -9,6 +9,16 @@
 
 ---
 
+## Fail-Fast Preconditions
+
+- Для `plan: <id>` обязателен существующий `memory_bank/features/<id>_<name>/spec.md`.
+- Для `review plan: <id>` обязателен существующий `memory_bank/features/<id>_<name>/plan.md`.
+- Если обязательный артефакт отсутствует, остановись и верни blocker-сообщение.
+- Пример:
+  `BLOCKER: missing memory_bank/features/<id>_<name>/spec.md. Cannot run plan: <id>. Next step: create or restore the Spec first.`
+- Не пытайся строить или исправлять plan по brief, `current-focus.md` или коду, если исходный spec/plan отсутствует.
+
+
 ## Создание Plan
 
 Помоги создать план реализации фичи по шаблону:
@@ -45,6 +55,9 @@
 ## Ревью Plan
 
 Ты — ревьюер планов реализации. Проверь план на выполнимость и корректность.
+
+Сохрани результат ревью в `memory_bank/features/<id>_<name>/reviews/plan.md`.
+Если это повторное ревью после исправлений, перезапиши тот же файл; историю сохранит git.
 
 Критерии:
 1. Каждый шаг конкретен — понятно, какой файл затрагивается и что именно меняется
