@@ -37,3 +37,6 @@
 # IDE
 .idea/
 .vscode/
+
+# Git worktrees
+.worktrees/
