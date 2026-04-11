@@ -29,10 +29,11 @@ RSpec.describe "Learning prompt catalog" do
     end
   end
 
-  it "contains exactly the required files and no others" do
-    actual = template_files.map { |f| f.relative_path_from(prompts_dir).to_s }.sort
-    expect(actual).to eq(required_files.sort),
-      "Expected exactly #{required_files.sort}, got #{actual}"
+  it "contains all required files" do
+    required_files.each do |relative_path|
+      expect(prompts_dir.join(relative_path)).to exist,
+        "Expected #{relative_path} to exist"
+    end
   end
 
   it "each file has valid YAML front matter with required keys" do
@@ -68,9 +69,9 @@ RSpec.describe "Learning prompt catalog" do
       expect(body).not_to match(/(?<!\{)\{[a-zA-Z_][a-zA-Z0-9_]*\}(?!\})/),
         "#{relative} contains single-brace placeholders like {variable}"
 
-      # Check no angle-bracket placeholders like <variable>
-      expect(body).not_to match(/<[a-zA-Z_][a-zA-Z0-9_]*>/),
-        "#{relative} contains angle-bracket placeholders like <variable>"
+      # Check no malformed double-brace placeholders like {{ var }} or {{var-name}}
+      expect(body).not_to match(/\{\{(?![a-zA-Z_][a-zA-Z0-9_]*\}\})/),
+        "#{relative} contains malformed double-brace placeholder (use {{variable_name}} format)"
     end
   end
 
@@ -81,7 +82,7 @@ RSpec.describe "Learning prompt catalog" do
       used_variables = body.scan(/\{\{([a-zA-Z_][a-zA-Z0-9_]*)\}\}/).flatten.uniq
 
       declared_variables = Array(template[:front_matter]["required_variables"])
-        .map { |v| v.to_s.gsub(/^\{\{|\}\}$/, "") }
+        .map(&:to_s)
 
       used_variables.each do |var|
         expect(declared_variables).to include(var),

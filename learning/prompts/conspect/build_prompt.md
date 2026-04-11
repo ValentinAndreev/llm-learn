@@ -3,7 +3,7 @@ id: conspect_build_prompt
 purpose: Generate a full structured learning conspect from a learning brief
 expected_output: A well-structured markdown document covering topic overview, key concepts, learning path, and depth-appropriate content
 required_variables:
-  - "{{brief}}"
+  - brief
 ---
 
 Using the learning brief below, generate a comprehensive learning conspect for the topic described in the brief.

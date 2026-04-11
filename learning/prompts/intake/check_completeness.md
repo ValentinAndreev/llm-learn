@@ -3,7 +3,7 @@ id: intake_check_completeness
 purpose: Evaluate whether the intake dialog contains enough information to generate a learning brief
 expected_output: A structured assessment with status (complete or incomplete), and if incomplete, a list of what is still missing
 required_variables:
-  - "{{dialog_history}}"
+  - dialog_history
 ---
 
 Review the following intake dialog and assess whether it contains sufficient information to generate a structured learning brief.

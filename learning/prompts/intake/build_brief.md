@@ -3,7 +3,7 @@ id: intake_build_brief
 purpose: Generate a structured learning brief from a completed intake dialog
 expected_output: A formatted learning brief capturing topic, scope, depth level, prior knowledge, and learning goals
 required_variables:
-  - "{{dialog_history}}"
+  - dialog_history
 ---
 
 Using the intake dialog below, generate a structured learning brief.

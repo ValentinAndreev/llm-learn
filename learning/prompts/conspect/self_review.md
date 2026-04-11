@@ -3,8 +3,8 @@ id: conspect_self_review
 purpose: Review a generated conspect for quality and completeness, then suggest improvements or flag gaps
 expected_output: A structured review identifying strengths, missing elements, and recommended changes to the conspect
 required_variables:
-  - "{{conspect}}"
-  - "{{brief}}"
+  - conspect
+  - brief
 ---
 
 Review the learning conspect below against the original learning brief. Assess its quality and completeness, then produce a structured critique with actionable recommendations.
