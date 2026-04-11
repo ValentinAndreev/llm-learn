@@ -30,7 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_09_000001) do
     t.bigint "dialog_id", null: false
     t.string "role", null: false
     t.datetime "updated_at", null: false
-    t.index ["dialog_id"], name: "index_messages_on_dialog_id"
+    t.index [ "dialog_id" ], name: "index_messages_on_dialog_id"
   end
 
   add_foreign_key "messages", "dialogs"

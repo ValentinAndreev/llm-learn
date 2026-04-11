@@ -27,7 +27,7 @@ learning/
   topics/
 ```
 
-- `learning/prompts/` содержит только shared prompt templates, их подкаталоги и служебный `.gitkeep`, пока каталог ещё пустой.
+- `learning/prompts/` содержит shared prompt templates v1: базовые intake и conspect templates, их подкаталоги и служебный `.gitkeep`.
 - `learning/topics/` содержит только каталоги вида `learning/topics/<topic_slug>/` и служебный `.gitkeep` на корневом уровне, пока в репозитории ещё нет ни одной темы.
 
 ## Жизненный цикл каталога темы
@@ -141,6 +141,9 @@ current_state: conspect_generated
 learning/
   prompts/
     intake/
+      system_role.md
+      ask_missing_context.md
+      check_completeness.md
       build_brief.md
     conspect/
       build_prompt.md
