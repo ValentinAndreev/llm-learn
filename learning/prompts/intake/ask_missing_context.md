@@ -15,4 +15,4 @@ However, the following information is still needed to build a complete learning 
 
 {{missing_fields}}
 
-Please answer the questions above so we can move forward. Feel free to answer in your own words — there are no right or wrong answers.
+Please provide the information above so we can move forward. Feel free to answer in your own words — there are no right or wrong answers.

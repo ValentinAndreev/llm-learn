@@ -4,10 +4,9 @@ purpose: Generate a full structured learning conspect from a learning brief
 expected_output: A well-structured markdown document covering topic overview, key concepts, learning path, and depth-appropriate content
 required_variables:
   - "{{brief}}"
-  - "{{topic}}"
 ---
 
-Using the learning brief below, generate a comprehensive learning conspect for the topic "{{topic}}".
+Using the learning brief below, generate a comprehensive learning conspect for the topic described in the brief.
 
 Learning brief:
 {{brief}}
@@ -16,7 +15,7 @@ Produce the conspect as a structured markdown document in the following format:
 
 ---
 
-## {{topic}} — Learning Conspect
+## Learning Conspect
 
 ### Overview
 [2–4 sentences describing what this topic is, why it matters, and what the learner will be able to do after completing this learning path]

@@ -15,7 +15,7 @@ RSpec.describe "Learning prompt catalog" do
   end
 
   let(:template_files) do
-    prompts_dir.glob("**/*.md").reject { |f| f.basename.to_s == ".gitkeep" }
+    prompts_dir.glob("**/*.md")
   end
 
   let(:parsed_templates) do
@@ -29,15 +29,10 @@ RSpec.describe "Learning prompt catalog" do
     end
   end
 
-  it "has exactly 6 template files" do
-    expect(template_files.size).to eq(6)
-  end
-
-  it "contains all required files" do
-    required_files.each do |relative_path|
-      full_path = prompts_dir.join(relative_path)
-      expect(full_path).to exist, "Expected #{relative_path} to exist"
-    end
+  it "contains exactly the required files and no others" do
+    actual = template_files.map { |f| f.relative_path_from(prompts_dir).to_s }.sort
+    expect(actual).to eq(required_files.sort),
+      "Expected exactly #{required_files.sort}, got #{actual}"
   end
 
   it "each file has valid YAML front matter with required keys" do
@@ -79,7 +74,7 @@ RSpec.describe "Learning prompt catalog" do
     end
   end
 
-  it "every {{variable}} used in body appears in required_variables" do
+  it "required_variables and body placeholders are consistent" do
     parsed_templates.each do |template|
       relative = template[:path].relative_path_from(prompts_dir)
       body = template[:body]
@@ -91,6 +86,11 @@ RSpec.describe "Learning prompt catalog" do
       used_variables.each do |var|
         expect(declared_variables).to include(var),
           "#{relative} uses {{#{var}}} but it is not listed in required_variables"
+      end
+
+      declared_variables.each do |var|
+        expect(used_variables).to include(var),
+          "#{relative} declares {{#{var}}} in required_variables but it is never used in the body"
       end
     end
   end
