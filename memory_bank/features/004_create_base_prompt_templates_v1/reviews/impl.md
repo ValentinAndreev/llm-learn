@@ -1,21 +1,35 @@
-# Impl Review — 004 Create Base Prompt Templates V1
+# Review
 
-**Дата:** 2026-04-11
-**Статус:** 0 замечаний, реализация принята
-**Проверенный HEAD:** `2113528`
+Фича: 004_create_base_prompt_templates_v1
+Стадия: impl
+Статус: advisory
+Дата: 2026-04-11
 
-## Что было исправлено до финального review
+## Итог
+Реализация соответствует brief/spec/plan. Дефектов в текущем состоянии не найдено.
 
-- `prompt_catalog_spec` больше не запрещает расширять каталог templates новыми файлами
-- `required_variables` приведены к формату имён переменных без `{{...}}`
-- `ask_missing_context.md` теперь явно требует сформулировать вопросы по missing fields
-- Нерелевантный churn в `db/schema.rb` убран
+## Замечания
+0 замечаний.
 
-## Финальный вердикт
+## Следующий шаг
+Можно продолжать: feature completed
 
-Текущее состояние feature 004 соответствует brief/spec/plan.
-Новых дефектов в финальном review не найдено.
+## Контекст
+Проверенный коммит: `899215f`
 
-## Residual Risk
+Проверенные артефакты:
+- `memory_bank/features/004_create_base_prompt_templates_v1/brief.md`
+- `memory_bank/features/004_create_base_prompt_templates_v1/spec.md`
+- `memory_bank/features/004_create_base_prompt_templates_v1/plan.md`
+- `learning/process.md`
+- все 6 template-файлов в `learning/prompts/`
+- `spec/lib/learning/prompt_catalog_spec.rb`
 
-Runtime-загрузка, рендеринг переменных и вызов LLM ещё не покрыты этой фичей и остаются scope feature 005.
+## Проверки
+- `bundle exec rspec spec/lib/learning/prompt_catalog_spec.rb`
+- `bundle exec rspec`
+
+## Остаточный риск
+Runtime-загрузка, рендеринг переменных и вызов LLM не входят в scope feature 004 и остаются scope feature 005.
+
+Полный `rspec` проходит, но даёт несвязанный с этой фичей deprecation warning про `:unprocessable_entity`.

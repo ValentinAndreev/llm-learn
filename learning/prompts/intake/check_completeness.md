@@ -1,31 +1,31 @@
 ---
 id: intake_check_completeness
-purpose: Evaluate whether the intake dialog contains enough information to generate a learning brief
-expected_output: A structured assessment with status (complete or incomplete), and if incomplete, a list of what is still missing
+purpose: Оценить, хватает ли содержимого intake-диалога для генерации учебного brief
+expected_output: Структурированная оценка со статусом complete или incomplete и списком недостающих данных, если контекст ещё неполный
 required_variables:
   - dialog_history
 ---
 
-Review the following intake dialog and assess whether it contains sufficient information to generate a structured learning brief.
+Проанализируй следующий intake-диалог и оцени, достаточно ли в нём информации, чтобы собрать структурированный учебный brief.
 
-Dialog history:
+История диалога:
 {{dialog_history}}
 
-Evaluate whether each of the following fields has been clearly established:
-- Topic (what the user wants to learn)
-- Scope (how broad or narrow the focus is)
-- Depth level (beginner / intermediate / advanced)
-- Prior knowledge (what the user already knows)
-- Learning goals (what the user wants to achieve)
+Проверь, насколько явно и достаточно определены следующие поля:
+- Тема (что именно пользователь хочет изучить)
+- Границы темы (насколько широкий или узкий нужен фокус)
+- Уровень глубины (базовый / средний / продвинутый)
+- Стартовый уровень (что пользователь уже знает)
+- Учебные цели (какого результата пользователь хочет достичь)
 
-Respond with a structured assessment in the following format:
+Ответь в следующем формате:
 
-**Status**: complete | incomplete
+**Статус**: complete | incomplete
 
-**Covered fields**:
-- List each field that has been sufficiently addressed
+**Покрытые поля**:
+- Перечисли поля, которые уже определены достаточно хорошо
 
-**Missing fields** (if incomplete):
-- List each field that is absent or too vague to use
+**Недостающие поля** (если incomplete):
+- Перечисли поля, которых не хватает или которые пока сформулированы слишком расплывчато
 
-Do not generate the brief yet. Only assess readiness.
+Пока не генерируй brief. На этом шаге нужно только оценить готовность контекста.

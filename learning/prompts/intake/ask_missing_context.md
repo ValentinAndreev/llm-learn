@@ -1,18 +1,18 @@
 ---
 id: intake_ask_missing_context
-purpose: Ask the user targeted questions to fill in information that is still missing from the intake dialog
-expected_output: A short set of focused questions addressing the specific missing fields, without repeating already-answered questions
+purpose: Сформулировать точечные вопросы пользователю, чтобы добрать недостающий контекст из intake-диалога
+expected_output: Короткий набор сфокусированных вопросов по конкретным недостающим пунктам без повторения уже известных данных
 required_variables:
   - missing_fields
   - dialog_summary
 ---
 
-Based on the conversation so far, here is what we know about the user's learning goal:
+Ниже краткая сводка того, что уже известно об учебной цели пользователя:
 
 {{dialog_summary}}
 
-The following information is still missing:
+Следующая информация всё ещё отсутствует:
 
 {{missing_fields}}
 
-Formulate a short set of focused questions — one per missing field — to gather this information from the user. Ask only what is listed above. Do not repeat information already covered in the summary. Do not start teaching.
+Сформулируй короткий набор точечных вопросов — по одному на каждый недостающий пункт — чтобы получить эту информацию от пользователя. Спрашивай только о перечисленном выше. Не повторяй сведения, которые уже есть в summary. Не начинай объяснять тему.

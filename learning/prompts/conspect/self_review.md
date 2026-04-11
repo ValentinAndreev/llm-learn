@@ -1,63 +1,63 @@
 ---
 id: conspect_self_review
-purpose: Review a generated conspect for quality and completeness, then suggest improvements or flag gaps
-expected_output: A structured review identifying strengths, missing elements, and recommended changes to the conspect
+purpose: Проверить сгенерированный конспект на качество и полноту, затем предложить улучшения или указать на пробелы
+expected_output: Структурированная оценка, в которой перечислены сильные стороны, недостающие элементы и рекомендуемые изменения для конспекта
 required_variables:
   - conspect
   - brief
 ---
 
-Review the learning conspect below against the original learning brief. Assess its quality and completeness, then produce a structured critique with actionable recommendations.
+Проверь учебный конспект ниже относительно исходного учебного brief. Оцени его качество и полноту, затем подготовь структурированную критику с конкретными рекомендациями.
 
-Original learning brief:
+Исходный учебный brief:
 {{brief}}
 
-Generated conspect to review:
+Сгенерированный конспект:
 {{conspect}}
 
-Produce the review in the following format:
+Верни результат в следующем формате:
 
 ---
 
-## Conspect Review
+## Проверка конспекта
 
-### Overall Assessment
-[1–3 sentences summarizing the quality of the conspect and whether it meets the goals stated in the brief]
+### Общая оценка
+[1–3 предложения с краткой оценкой качества конспекта и того, насколько он соответствует целям из brief]
 
-### What Works Well
-- [Strength 1 — specific and concrete]
-- [Strength 2]
-- [Add or remove as needed]
+### Что получилось хорошо
+- [Сильная сторона 1 — конкретно и по делу]
+- [Сильная сторона 2]
+- [При необходимости добавь или убери пункты]
 
-### Gaps & Missing Elements
-List anything required by the brief that the conspect fails to address:
+### Пробелы и недостающие элементы
+Перечисли всё, что требуется по brief, но не отражено в конспекте:
 
-- [Gap 1 — reference the specific brief requirement it misses]
-- [Gap 2]
-- [Write "None identified" if the conspect is complete]
+- [Пробел 1 — укажи, какое именно требование brief не покрыто]
+- [Пробел 2]
+- [Если пробелов нет, напиши "Не выявлено"]
 
-### Quality Issues
-List structural, clarity, or accuracy problems independent of the brief:
+### Проблемы качества
+Перечисли структурные, смысловые или содержательные проблемы, не зависящие напрямую от brief:
 
-- [Issue 1 — e.g. a concept explanation that is vague or incorrect]
-- [Issue 2]
-- [Write "None identified" if no issues found]
+- [Проблема 1 — например, слишком расплывчатое или неточное объяснение понятия]
+- [Проблема 2]
+- [Если проблем нет, напиши "Не выявлено"]
 
-### Recommended Changes
-Concrete, prioritized suggestions for improving the conspect:
+### Рекомендуемые изменения
+Дай конкретные и приоритизированные предложения по улучшению конспекта:
 
-1. [Change 1 — most important]
-2. [Change 2]
-3. [Add or remove as needed]
+1. [Изменение 1 — самое важное]
+2. [Изменение 2]
+3. [При необходимости добавь или убери пункты]
 
-### Verdict
-[One of: **Approved** / **Needs minor revision** / **Needs major revision**]
-[One sentence justifying the verdict]
+### Вердикт
+[Один из вариантов: **Принято** / **Нужна небольшая доработка** / **Нужна существенная доработка**]
+[Одно предложение с обоснованием вердикта]
 
 ---
 
-Guidelines:
-- Judge the conspect strictly against the brief — do not penalize for omitting things the brief did not request
-- Be specific: vague feedback like "could be better" is not acceptable
-- If the conspect is well-formed and complete, say so clearly rather than inventing criticism
-- Focus on what matters to the learner: actionability, accuracy, and alignment with stated goals
+Правила:
+- Оценивай конспект строго относительно brief — не считай ошибкой отсутствие того, чего brief не требовал
+- Будь конкретным: расплывчатая обратная связь вроде "можно улучшить" недопустима
+- Если конспект действительно хорош и полон, скажи это явно, не придумывай замечания ради замечаний
+- Фокусируйся на том, что важно для пользователя: практичность, точность и соответствие заявленным целям

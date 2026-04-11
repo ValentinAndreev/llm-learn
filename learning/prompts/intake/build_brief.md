@@ -1,37 +1,37 @@
 ---
 id: intake_build_brief
-purpose: Generate a structured learning brief from a completed intake dialog
-expected_output: A formatted learning brief capturing topic, scope, depth level, prior knowledge, and learning goals
+purpose: Сгенерировать структурированный учебный brief на основе завершённого intake-диалога
+expected_output: Форматированный учебный brief, который фиксирует тему, границы, глубину, стартовый уровень и учебные цели
 required_variables:
   - dialog_history
 ---
 
-Using the intake dialog below, generate a structured learning brief.
+На основе intake-диалога ниже собери структурированный учебный brief.
 
-Dialog history:
+История диалога:
 {{dialog_history}}
 
-Produce the brief in the following format:
+Верни brief в следующем формате:
 
 ---
 
-**Learning Brief**
+**Учебный бриф**
 
-**Topic**: [The subject or skill to be learned]
+**Тема**: [Какой предмет, навык или область нужно изучить]
 
-**Scope**: [How broad or narrow the focus is]
+**Границы темы**: [Насколько широкий или узкий нужен фокус]
 
-**Depth level**: [Beginner / Intermediate / Advanced]
+**Уровень глубины**: [Базовый / Средний / Продвинутый]
 
-**Prior knowledge**: [What the learner already knows about this topic]
+**Стартовый уровень**: [Что пользователь уже знает по теме]
 
-**Learning goals**:
-- [Goal 1]
-- [Goal 2]
-- [Goal 3 — add or remove as needed]
+**Учебные цели**:
+- [Цель 1]
+- [Цель 2]
+- [Цель 3 — при необходимости добавь или убери пункты]
 
-**Notes**: [Any additional context, constraints, or preferences mentioned by the user — omit this section if none]
+**Примечания**: [Дополнительный контекст, ограничения или предпочтения пользователя — если их нет, этот раздел можно опустить]
 
 ---
 
-Be precise and faithful to what the user said. Do not add assumptions or invent details not present in the dialog.
+Будь точным и опирайся только на то, что действительно сказал пользователь. Не добавляй предположений и не выдумывай детали, которых нет в диалоге.

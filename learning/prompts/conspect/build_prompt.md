@@ -1,65 +1,65 @@
 ---
 id: conspect_build_prompt
-purpose: Generate a full structured learning conspect from a learning brief
-expected_output: A well-structured markdown document covering topic overview, key concepts, learning path, and depth-appropriate content
+purpose: Сгенерировать полный структурированный учебный конспект на основе учебного brief
+expected_output: Хорошо структурированный markdown-документ с обзором темы, ключевыми понятиями, учебным маршрутом и контентом нужной глубины
 required_variables:
   - brief
 ---
 
-Using the learning brief below, generate a comprehensive learning conspect for the topic described in the brief.
+На основе brief ниже сгенерируй полный учебный конспект по теме, описанной в этом brief.
 
-Learning brief:
+Учебный brief:
 {{brief}}
 
-Produce the conspect as a structured markdown document in the following format:
+Верни конспект как структурированный markdown-документ в следующем формате:
 
 ---
 
-## Learning Conspect
+## Учебный конспект
 
-### Overview
-[2–4 sentences describing what this topic is, why it matters, and what the learner will be able to do after completing this learning path]
+### Обзор
+[2–4 предложения о том, что это за тема, почему она важна и что пользователь сможет делать или понимать после прохождения этого учебного маршрута]
 
-### Key Concepts
-List the core concepts the learner must understand, grouped by theme if applicable:
+### Ключевые понятия
+Перечисли основные понятия, которые необходимо понять, при необходимости сгруппируй их по смысловым блокам:
 
-1. **[Concept name]** — [Brief explanation]
-2. **[Concept name]** — [Brief explanation]
-3. [Add or remove entries as needed]
+1. **[Название понятия]** — [Короткое объяснение]
+2. **[Название понятия]** — [Короткое объяснение]
+3. [При необходимости добавь или убери пункты]
 
-### Learning Path
-A step-by-step progression tailored to the learner's depth level and prior knowledge:
+### Учебный маршрут
+Пошаговая последовательность, адаптированная под нужную глубину и стартовый уровень пользователя:
 
-**Step 1 — [Stage name]**
-- [What to study or do]
-- [Expected outcome]
+**Шаг 1 — [Название этапа]**
+- [Что изучить или сделать]
+- [Ожидаемый результат]
 
-**Step 2 — [Stage name]**
-- [What to study or do]
-- [Expected outcome]
+**Шаг 2 — [Название этапа]**
+- [Что изучить или сделать]
+- [Ожидаемый результат]
 
-[Continue for all stages]
+[Продолжай маршрут нужным количеством шагов]
 
-### Depth-Appropriate Content
-Specific topics, resources, or exercises matched to the learner's level:
+### Контент нужной глубины
+Конкретные темы, материалы, упражнения или направления, соответствующие уровню пользователя:
 
-- [Item 1]
-- [Item 2]
-- [Item 3 — add or remove as needed]
+- [Пункт 1]
+- [Пункт 2]
+- [Пункт 3 — при необходимости добавь или убери пункты]
 
-### Practice & Validation
-Suggested exercises, projects, or checkpoints to confirm understanding:
+### Практика и проверка понимания
+Предложи упражнения, мини-проекты или контрольные точки, которые помогут проверить усвоение материала:
 
-- [Exercise or project 1]
-- [Exercise or project 2]
+- [Упражнение или проект 1]
+- [Упражнение или проект 2]
 
-### Notes
-[Any constraints, preferences, or contextual details from the brief that shaped this conspect — omit section if none]
+### Примечания
+[Ограничения, предпочтения или контекст из brief, которые повлияли на структуру конспекта — если их нет, раздел можно опустить]
 
 ---
 
-Guidelines:
-- Stay faithful to the scope, depth level, and goals stated in the brief
-- Do not invent prerequisites or goals not mentioned in the brief
-- Adjust detail density to match the stated depth level (beginner = more explanation; advanced = more precision)
-- Keep the conspect actionable: every section should help the learner know what to do next
+Правила:
+- Строго соблюдай границы темы, глубину и цели, указанные в brief
+- Не выдумывай предпосылок или целей, которых нет в brief
+- Подбирай плотность деталей под заявленный уровень глубины (базовый = больше пояснений, продвинутый = больше точности)
+- Делай конспект практичным: каждый раздел должен помогать понять, что изучать и делать дальше
